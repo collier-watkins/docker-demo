@@ -4,8 +4,6 @@ services:
   minecraft_server:
     image: itzg/minecraft-server:java21
     restart: unless-stopped
-    depends_on:
-      - mysql
     environment:
       EULA: "TRUE"
       VERSION: "1.21.1"
@@ -28,3 +26,5 @@ services:
         krakocollo1
     ports:
       - "25565:25565"
+    volumes:       # attach the relative directory 'data' to the container's /data path
+      - /home/collier/projects/docker-demo/minecraftExample/host-machine-data:/data
