@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  minecraft_server:
+    image: itzg/minecraft-server:java21
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      EULA: "TRUE"
+      VERSION: "1.21.1"
+      VIEW_DISTANCE: "12"
+      TYPE: "FABRIC"
+      DIFFICULTY: "HARD"
+      MODE: "creative"
+      FORCE_GAMEMODE: "TRUE"
+      MOTD: "This is a docker test"
+      ICON: "https://i0.wp.com/www.orthodoxroad.com/wp-content/uploads/2012/12/resurrection2007.jpg?ssl=1"
+      OVERRIDE_ICON: "TRUE"
+      ANNOUNCE_PLAYER_ACHIEVEMENTS: "TRUE"
+      SPAWN_PROTECTION: "0"
+      MIN_MEMORY: "1G"
+      MAX_MEMORY: "16G"
+      ENFORCE_WHITELIST: "FALSE"
+      EXISTING_WHITELIST_FILE: "SYNCHRONIZE"
+      OPS: |
+        Chuck_Wagon18
+        krakocollo1
+    ports:
+      - "25565:25565"
