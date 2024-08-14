@@ -27,4 +27,4 @@ services:
     ports:
       - "25565:25565"
     volumes:       # attach the relative directory 'data' to the container's /data path
-      - /home/collier/projects/docker-demo/minecraftExample/host-machine-data:/data
+      - /home/collier/projects/docker-demo/4_minecraftExample/host-machine-data:/data
