@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Build an image called "web" from the Dockerfile in the current directory, builds container from image, links host port 5000 to container port 5000 for access
   web:
     build: .
     ports:

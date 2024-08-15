@@ -1,16 +1,23 @@
 version: '3.8'
 
+# Docker compose files with multiple container definitions create the containers within the same "Docker network" by default.
+# This network allows containers to talk to each other via port communication, but does not expose any ports to the localhost by default.
+# Using ports: - "5000:5000" syntax still links localhost ports to container ports like usual.
+
 services:
+  # Build an image called python_server from the Dockerfile in our current directory, build container from that image, link host port 5000 to container port 5000, use environment variables, wait on all that until postgres says "service healthy"
   python_server:
     build: .
     ports:
       - "5000:5000"
     environment:
       - FLASK_APP=app.py
-      - DATABASE_URL=postgresql://admin:admin@postgres:5432/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
+  # Pull the postgres:13 image from docker hub, build container, use environment variables, save data to the 'postgres_data' named volume
   postgres:
     image: postgres:13
     environment:
@@ -19,7 +26,13 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:  #Hacky solution to make sure postgres is up and ready before python looks for it. Would rather write better python code to handle "if database can't be reached" possibility
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
+  # Pull the pgadmin4 image from docker hub, build container, use environment variables, link host port 5050 to container port 80
   pgadmin:
     image: dpage/pgadmin4
     environment:

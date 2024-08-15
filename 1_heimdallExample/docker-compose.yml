@@ -1,5 +1,6 @@
 ---
 services:
+    # Pull the heimdall image from docker hub, build container, link host port 5174 to container port 80, restart unless the server admin (you) explicitly stops the container.
   heimdall:
     image: lscr.io/linuxserver/heimdall:latest
     container_name: heimdall

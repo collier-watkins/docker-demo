@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+  # Pull the minecraft-server image from docker hub, build container, use environment variables, link host port 25565 (default minecraft networking port) to container port 25565, link container directory /data to the specified host folder location
   minecraft_server:
     image: itzg/minecraft-server:java21
     restart: unless-stopped
