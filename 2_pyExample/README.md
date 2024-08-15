@@ -1,4 +1,4 @@
-In this example: Build your own container
+In this example: Build your own image and container
 
 Use the bash commands in commands.txt or run `docker compose up` to use docker compose syntax. Either way, the same thing is done:
 
