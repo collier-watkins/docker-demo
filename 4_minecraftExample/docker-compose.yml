@@ -27,5 +27,5 @@ services:
         krakocollo1
     ports:
       - "25565:25565"
-    volumes:       # attach the relative directory 'data' to the container's /data path
+    volumes:       # attach a host directory to the container's /data path
       - /home/collier/projects/docker-demo/4_minecraftExample/host-machine-data:/data
